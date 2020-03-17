@@ -16,12 +16,16 @@ data = json.load(open(jsonFilePath))
 def translate(w):
     global word
     global data
-    try:
+    if w in data:
         for meaning in data[w]:
             print(meaning)
-        return
-
-    except:
+    elif w.upper() in data:
+        for meaning in data[w.upper()]:
+            print(meaning)
+    elif w.title() in data:
+        for meaning in data[w.title()]:
+            print(meaning)
+    else:
         d = get_close_matches(w, data.keys(), 5, 0.7)
         if len(d) > 0:
             print("Did you mean any of these words")
